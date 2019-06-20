@@ -1,6 +1,8 @@
 import { Model, Sequelize } from 'sequelize-typescript';
 import { SequelizeConfig } from 'sequelize-typescript/lib/types/SequelizeConfig';
-import config = require('../config');
+import User from './user';
+import Session from './session';
+import config = require('../sequelize-config');
 
 class Mock extends Model<Mock> {
 
@@ -11,6 +13,6 @@ export const sequelize = new Sequelize(<SequelizeConfig>{
     ...config,
     modelPaths: [ path.join(__dirname, './*.model.ts') ]
 });
-sequelize.addModels([ Mock ]);
+sequelize.addModels([ User, Session ]);
 
-export { Mock };
+export { User, Session };

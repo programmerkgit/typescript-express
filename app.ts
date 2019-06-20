@@ -1,6 +1,4 @@
-import { indexRouter } from './app/routes';
-import { usersRouter } from './app/routes/users';
-import config = require('./db/config');
+import { authRouter } from './app/routes/auth';
 
 const createError = require('http-errors');
 const express = require('express');
@@ -27,8 +25,7 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, '../public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
