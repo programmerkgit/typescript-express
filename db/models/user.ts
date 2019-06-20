@@ -1,5 +1,6 @@
 import { Column, DataType, Model, Scopes, Table } from 'sequelize-typescript';
 
+
 const bcrypt = require('bcrypt');
 
 @Scopes({})
@@ -27,20 +28,6 @@ export default class User extends Model<User> {
         }
     })
     password?: string;
-
-
-    @Column({
-        type: DataType.STRING,
-        get: function () {
-            if (this.getDataValue('userObject')) {
-                return JSON.parse(this.getDataValue('userObject'));
-            }
-        },
-        set: function (data) {
-            this.setDataValue('userObject', JSON.stringify(data));
-        }
-    })
-    userObject?: string;
 
 
     comparePassword(password: string): boolean {
