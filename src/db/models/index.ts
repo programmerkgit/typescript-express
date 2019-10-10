@@ -1,11 +1,11 @@
 import { Sequelize } from 'sequelize-typescript';
-import { SequelizeConfig } from 'sequelize-typescript/lib/types/SequelizeConfig';
+
 import User from './user';
 import Session from './session';
-import config = require('../sequelize-config');
 
 const path = require('path');
-export const sequelize = new Sequelize(<SequelizeConfig>{
+const config = require(path.join(__dirname, '../../../sequelize.json'))[ process.env.NODE_ENV || 'dev' ];
+export const sequelize = new Sequelize({
     ...config,
     modelPaths: [ path.join(__dirname, './*.model.ts') ]
 });

@@ -21,13 +21,16 @@ export default class User extends Model<User> {
 
     @Column({
         type: DataType.STRING,
-        set: function (value) {
-            const salt = bcrypt.genSaltSync(10);
-            const encryptedPass = bcrypt.hashSync(value, salt);
-            this.setDataValue('password', encryptedPass);
-        }
     })
-    password?: string;
+    get password(): string {
+        return this.getDataValue('password');
+    }
+
+    set password(value: string) {
+        const salt = bcrypt.genSaltSync(10);
+        const encryptedPass = bcrypt.hashSync(value, salt);
+        this.setDataValue('password', encryptedPass);
+    }
 
 
     comparePassword(password: string): boolean {
