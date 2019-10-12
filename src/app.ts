@@ -1,5 +1,6 @@
 import { authRouter } from './app/routes/auth';
 import { ErrorRequestHandler, RequestHandler } from 'express';
+import { config } from './config';
 
 const createError = require('http-errors');
 const express = require('express');
@@ -10,14 +11,15 @@ const sassMiddleware = require('node-sass-middleware');
 
 // @ts-ignore
 export const app = express();
-
+const cors = require('cors');
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
-app.use(cookieParser());
+app.use(cookieParser(config.cookieSecret));
+app.use(cors(config.corsOptions));
 app.use(sassMiddleware({
     src: path.join(__dirname, '../public'),
     dest: path.join(__dirname, '../public'),
