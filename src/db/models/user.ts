@@ -1,9 +1,8 @@
-import { Column, DataType, Model, Scopes, Table } from 'sequelize-typescript';
+import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
 
 const bcrypt = require('bcrypt');
 
-@Scopes({})
 @Table({
     timestamps: true,
     tableName: 'Users'
@@ -32,13 +31,9 @@ export default class User extends Model<User> {
         this.setDataValue('password', encryptedPass);
     }
 
-
     comparePassword(password: string): boolean {
         return bcrypt.compareSync(password, this.password);
     }
 
-
     /* Associations */
-
-
 }

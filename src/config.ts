@@ -4,9 +4,10 @@ export const config = {
         httpOnly: true,
         signed: true
     },
+    sessionSecret: '',
     corsOptions: {
         origin: 'http://localhost:4200',
         credentials: true
     },
-    cookieSecret: "jreoiwjlaJKJLWLIOfae910"
+    cookieSecret: 'jreoiwjlaJKJLWLIOfae910'
 };
