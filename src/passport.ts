@@ -7,10 +7,10 @@ passport.use(new Strategy({
     usernameField: 'email',
     passwordField: 'password'
 }, (email, password, done) => {
-    console.log(email, password, 'use passport');
     User.findOne({where: {email}}).then(user => {
         if (user) {
             if (user.comparePassword(password)) {
+                console.log('Login success');
                 return done(null, user);
             } else {
                 return done(null, false, {message: 'Incorrect password'});
@@ -30,9 +30,9 @@ passport.serializeUser(function (user: User, done) {
 passport.deserializeUser((id: string, done) => {
     User.findByPk(id).then(user => {
         if (user) {
-            done(false, user);
+            done(null, user);
         } else {
-            done(null, false);
+            done(false, false);
         }
     }).catch(error => {
         done(error, false);

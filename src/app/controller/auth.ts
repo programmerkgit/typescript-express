@@ -55,29 +55,29 @@ export const signUp: RequestHandler = ((req, res, next) => {
     }).catch(next);
 });
 
-
-export const checkLogin: RequestHandler = ((req, res, next) => {
-    const sessionId = req.signedCookies[ 'sessionId' ];
-    Session.findByPk(sessionId).then(session => {
-        if (session) {
-            res.cookie('sessionId', session.id, config.cookieOptions);
-            res.json({result: true});
-        } else {
-            res.json({result: false});
-        }
-    }).catch(next);
-});
-
-export const loginGuard: RequestHandler = (req, res, next) => {
-    const sessionId = req.signedCookies[ 'sessionId' ];
-    Session.scope('user').findByPk(sessionId).then(session => {
-        if (session) {
-            res.locals.user = session.user;
-            res.locals.userId = session.user.id;
-            res.cookie('sessionId', session.id, config.cookieOptions);
-            next();
-        } else {
-            res.json({result: false});
-        }
-    });
-};
+//
+// export const checkLogin: RequestHandler = ((req, res, next) => {
+//     const sessionId = req.signedCookies[ 'sessionId' ];
+//     Session.findByPk(sessionId).then(session => {
+//         if (session) {
+//             res.cookie('sessionId', session.id, config.cookieOptions);
+//             res.json({result: true});
+//         } else {
+//             res.json({result: false});
+//         }
+//     }).catch(next);
+// });
+//
+// export const loginGuard: RequestHandler = (req, res, next) => {
+//     const sessionId = req.signedCookies[ 'sessionId' ];
+//     Session.scope('user').findByPk(sessionId).then(session => {
+//         if (session) {
+//             res.locals.user = session.user;
+//             res.locals.userId = session.user.id;
+//             res.cookie('sessionId', session.id, config.cookieOptions);
+//             next();
+//         } else {
+//             res.json({result: false});
+//         }
+//     });
+// };

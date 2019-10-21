@@ -35,5 +35,7 @@ export default class User extends Model<User> {
         return bcrypt.compareSync(password, this.password);
     }
 
+
+
     /* Associations */
 }

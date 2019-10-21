@@ -1,8 +1,13 @@
 'use strict';
 
 import { QueryInterface } from 'sequelize';
+import { User } from '../models/index';
 
 export const up = (queryInterface: QueryInterface, Sequelize: any) => {
+    return User.create({
+        email: 'k.kubo.private.mobile@gmail.com',
+        password: 'a'
+    });
     /*
          Add altering commands here.
          Return a promise to correctly handle asynchronicity.
