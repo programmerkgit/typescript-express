@@ -2,7 +2,7 @@
   "dev": {
     "username": "root",
     "password": "",
-    "database": "database_dev",
+    "database": "dot_memo_dev",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

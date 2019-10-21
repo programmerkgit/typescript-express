@@ -1,4 +1,5 @@
-import { checkLogin, login, loginGuard, logout, signUp } from '../controller/auth';
+import { checkLogin, loginGuard, logout, signUp } from '../controller/auth';
+import { passport } from '../../passport';
 
 const express = require('express');
 const authRouter = express.Router();
@@ -8,7 +9,11 @@ const authRouter = express.Router();
 
 /* Session */
 /* create */
-authRouter.post('/login', login);
+authRouter.post('/login', passport.authenticate('local', {
+    failureFlash: 'failure flash',
+    successRedirect: '/',
+    failureRedirect: '/login',
+}));
 /* get */
 authRouter.get('/check-login', checkLogin);
 /* destroy */

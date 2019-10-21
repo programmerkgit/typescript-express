@@ -1,4 +1,4 @@
-import * as passport from 'passport';
+import passport = require('passport');
 import { Strategy } from 'passport-local';
 import { User } from './db/models';
 
@@ -7,6 +7,7 @@ passport.use(new Strategy({
     usernameField: 'email',
     passwordField: 'password'
 }, (email, password, done) => {
+    console.log(email, password, 'use passport');
     User.findOne({where: {email}}).then(user => {
         if (user) {
             if (user.comparePassword(password)) {

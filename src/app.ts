@@ -3,6 +3,7 @@ import { ErrorRequestHandler, RequestHandler } from 'express';
 import { config } from './config';
 import { passport } from './passport';
 
+// const session = require('express-session');
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -18,7 +19,6 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(express.json());
 
-app.use(cookieParser(config.cookieSecret));
 app.use(cors(config.corsOptions));
 app.use(sassMiddleware({
     src: path.join(__dirname, '../public'),
@@ -27,11 +27,13 @@ app.use(sassMiddleware({
     sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, '../public')));
+// app.use(session({secret: 'secret'}));
+app.use(cookieParser(config.cookieSecret));
 app.use(express.urlencoded({extended: false}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/auth', authRouter);
+app.use('/', authRouter);
 
 // catch 404 and forward to error handler
 app.use(<RequestHandler>function (req, res, next) {
@@ -45,6 +47,7 @@ app.use(<ErrorRequestHandler>function (err, req, res, next) {
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
     // render the error page
+    console.log(err);
     res.status(err.status || 500);
     res.render('error');
 });
