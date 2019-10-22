@@ -24,5 +24,8 @@ export const mysqlStoreOptions = {
     port: 3306,
     user: 'root',
     password: '',
-    database: 'demo_dev'
+    database: 'demo_dev',
+    schema: {
+        tableName: 'Sessions'
+    }
 };

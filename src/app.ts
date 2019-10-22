@@ -15,28 +15,36 @@ const sassMiddleware = require('node-sass-middleware');
 // @ts-ignore
 export const app = express();
 const cors = require('cors');
-// view engine setup
-app.set('views', path.join(__dirname, '../views'));
-app.set('view engine', 'pug');
+
+/*  logger */
 app.use(logger('dev'));
+/* parser */
+app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
-app.use(cors(corsOptions));
+/* view engines */
+app.set('views', path.join(__dirname, '../views'));
+app.set('view engine', 'pug');
+
+/* static files */
 app.use(sassMiddleware({
     src: path.join(__dirname, '../public'),
     dest: path.join(__dirname, '../public'),
-    indentedSyntax: true, // true = .sass and false = .scss
+    indentedSyntax: false, // true = .sass and false = .scss
     sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, '../public')));
+/* authentication */
+app.use(cors(corsOptions));
 app.use(session({
     ...sessionConfig,
     store: sessionStore
 }));
-app.use(express.urlencoded({extended: false}));
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+/* applications */
 app.use('/', authRouter);
 
 // catch 404 and forward to error handler
