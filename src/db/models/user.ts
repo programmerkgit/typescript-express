@@ -15,7 +15,10 @@ export default class User extends Model<User> {
     })
     id: string;
 
-    @Column({type: DataType.STRING})
+    @Column({
+        type: DataType.STRING,
+        unique: true
+    })
     email?: string;
 
     @Column({
@@ -34,7 +37,6 @@ export default class User extends Model<User> {
     comparePassword(password: string): boolean {
         return bcrypt.compareSync(password, this.password);
     }
-
 
 
     /* Associations */

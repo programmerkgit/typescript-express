@@ -3,11 +3,11 @@
 import { QueryInterface } from 'sequelize';
 import { User } from '../models/index';
 
+const email = 'admin@example.com';
+const password = 'Admin1234';
+
 export const up = (queryInterface: QueryInterface, Sequelize: any) => {
-    return User.create({
-        email: 'k.kubo.private.mobile@gmail.com',
-        password: 'a'
-    });
+    return User.create({email, password});
     /*
          Add altering commands here.
          Return a promise to correctly handle asynchronicity.
@@ -21,9 +21,7 @@ export const up = (queryInterface: QueryInterface, Sequelize: any) => {
 };
 export const down = (queryInterface: QueryInterface, Sequelize: any) => {
     return User.destroy({
-        where: {
-            email: 'k.kubo.private.mobile@gmail.com'
-        }
+        where: {email}
     });
     /*
        Add reverting commands here.
