@@ -20,6 +20,11 @@ export const up = (queryInterface: QueryInterface, Sequelize: any) => {
        */
 };
 export const down = (queryInterface: QueryInterface, Sequelize: any) => {
+    return User.destroy({
+        where: {
+            email: 'k.kubo.private.mobile@gmail.com'
+        }
+    });
     /*
        Add reverting commands here.
        Return a promise to correctly handle asynchronicity.

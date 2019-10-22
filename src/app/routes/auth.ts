@@ -1,5 +1,4 @@
-import { checkLogin, loginGuard, signUp } from '../controller/auth';
-import { passport } from '../../passport';
+import { checkLogin, login, loginGuard, logout, signUp } from '../controller/auth';
 import { RequestHandler } from 'express';
 
 const express = require('express');
@@ -10,17 +9,16 @@ const authRouter = express.Router();
 
 /* Session */
 /* create */
-authRouter.post('/login', passport.authenticate('local'), <RequestHandler>((req, res, next) => {
+authRouter.post('/login', login, <RequestHandler>((req, res, next) => {
+    console.log('req,session', req.session);
+    console.log('req:sessiondId', req.sessionID);
     res.json({user: req.user});
 }));
 /* get */
 authRouter.get('/check-login', checkLogin);
 
 /* destroy */
-authRouter.get('/logout', <RequestHandler>((req, res, next) => {
-    req.logOut();
-    res.json({result: true});
-}));
+authRouter.get('/logout', logout);
 
 /* create user and session */
 authRouter.post('/sign-up', signUp);

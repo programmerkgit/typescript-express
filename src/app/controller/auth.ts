@@ -2,7 +2,13 @@ import { RequestHandler } from 'express-serve-static-core';
 import { User } from '../../db/models';
 import { passport } from '../../passport';
 
+
 export const login: RequestHandler = passport.authenticate('local');
+
+export const logout: RequestHandler = <RequestHandler>((req, res, next) => {
+    req.logOut();
+    res.json({result: true});
+});
 
 export const signUp: RequestHandler = ((req, res, next) => {
     const body = req.body;

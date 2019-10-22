@@ -1,13 +1,12 @@
 import { authRouter } from './app/routes/auth';
 import { ErrorRequestHandler, RequestHandler } from 'express';
-import { config } from './config';
+import { corsOptions, sessionConfig } from './config';
 import { passport } from './passport';
 
 const session = require('express-session');
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const sassMiddleware = require('node-sass-middleware');
 // @ts-ignore
@@ -19,7 +18,7 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(express.json());
 
-app.use(cors(config.corsOptions));
+app.use(cors(corsOptions));
 app.use(sassMiddleware({
     src: path.join(__dirname, '../public'),
     dest: path.join(__dirname, '../public'),
@@ -27,8 +26,7 @@ app.use(sassMiddleware({
     sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, '../public')));
-app.use(session({secret: 'secret'}));
-app.use(cookieParser(config.cookieSecret));
+app.use(session(sessionConfig));
 app.use(express.urlencoded({extended: false}));
 app.use(passport.initialize());
 app.use(passport.session());
