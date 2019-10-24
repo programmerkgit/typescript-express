@@ -1,4 +1,4 @@
-import { BelongsTo, Column, DataType, ForeignKey, Model, Scopes, Table } from 'sequelize-typescript';
+import { Column, DataType, Model, Scopes, Table } from 'sequelize-typescript';
 import User from './user';
 
 @Scopes({
@@ -7,7 +7,7 @@ import User from './user';
     }
 })
 @Table({
-    timestamps: true,
+    timestamps: false,
     tableName: 'Sessions'
 })
 export default class Session extends Model<Session> {
@@ -16,13 +16,16 @@ export default class Session extends Model<Session> {
         primaryKey: true,
         type: DataType.UUIDV4
     })
-    id: string;
+    session_id: string;
 
-    @ForeignKey(() => User)
-    @Column({type: DataType.UUIDV4, allowNull: false})
-    userId: string;
+    @Column({
+        type: DataType.INTEGER
+    })
+    expires: number;
 
-    @BelongsTo(() => User)
-    user: User;
+    @Column({
+        type: DataType.TEXT
+    })
+    data: string;
 
 }

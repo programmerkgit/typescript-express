@@ -1,29 +1,28 @@
-import { signUp } from '../controller/auth';
-import { passport } from '../../passport';
-import { RequestHandler } from 'express';
+import {checkLogin, login, loginGuard, logout, signUp} from '../controller/auth';
+import {RequestHandler} from 'express';
+import {Session} from '../../db/models';
 
 const express = require('express');
 const authRouter = express.Router();
 
 /* GET home page. */
 
-
 /* Session */
 /* create */
-authRouter.post('/login', passport.authenticate('local'), <RequestHandler>((req, res, next) => {
-    res.json({user: req.user});
+authRouter.post('/login', login, <RequestHandler>((req, res, next) => {
+    Session.findOne().then(sessio => {
+        res.json({user: req.user});
+    }).catch(error => {
+        console.log(error);
+    });
 }));
 /* get */
-// authRouter.get('/check-login', checkLogin);
+authRouter.get('/check-login', checkLogin);
+
 /* destroy */
-authRouter.get('/logout', <RequestHandler>((req, res, next) => {
-    req.logOut();
-    res.json({result: true});
-}));
+authRouter.get('/logout', logout);
 
 /* create user and session */
 authRouter.post('/sign-up', signUp);
 
-// authRouter.use(loginGuard);
-
-export { authRouter };
+export {authRouter};

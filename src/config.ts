@@ -1,13 +1,31 @@
-export const config = {
-    cookieOptions: {
-        maxAge: 5 * 24 * 60 * 60 * 1000,
+import { SessionOptions } from 'express-session';
+
+export const corsOptions = {
+    origin: 'http://localhost:4200',
+    credentials: true
+};
+
+
+export const sessionConfig: SessionOptions = {
+    secret: 'secret',
+    resave: true,
+    cookie: {
+        path: '/',
         httpOnly: true,
-        signed: true
+        secure: false,
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        // domain:
     },
-    sessionSecret: '',
-    corsOptions: {
-        origin: 'http://localhost:4200',
-        credentials: true
-    },
-    cookieSecret: 'jreoiwjlaJKJLWLIOfae910'
+};
+
+
+export const mysqlStoreOptions = {
+    host: 'localhost',
+    port: 3306,
+    user: 'root',
+    password: '',
+    database: 'demo_dev',
+    schema: {
+        tableName: 'Sessions'
+    }
 };

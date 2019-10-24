@@ -1,39 +1,53 @@
 import { authRouter } from './app/routes/auth';
 import { ErrorRequestHandler, RequestHandler } from 'express';
-import { config } from './config';
+import { corsOptions, mysqlStoreOptions, sessionConfig } from './config';
 import { passport } from './passport';
+import {userRouter} from "./app/routes/user";
 
 const session = require('express-session');
+const MysqlStore = require('express-mysql-session')(session);
+const sessionStore = new MysqlStore(mysqlStoreOptions);
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const sassMiddleware = require('node-sass-middleware');
+
 // @ts-ignore
 export const app = express();
 const cors = require('cors');
-// view engine setup
-app.set('views', path.join(__dirname, '../views'));
-app.set('view engine', 'pug');
+
+/*  logger */
 app.use(logger('dev'));
+/* parser */
+app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
-app.use(cors(config.corsOptions));
+/* view engines */
+app.set('views', path.join(__dirname, '../views'));
+app.set('view engine', 'pug');
+
+/* static files */
 app.use(sassMiddleware({
     src: path.join(__dirname, '../public'),
     dest: path.join(__dirname, '../public'),
-    indentedSyntax: true, // true = .sass and false = .scss
+    indentedSyntax: false, // true = .sass and false = .scss
     sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, '../public')));
-app.use(session({secret: 'secret'}));
-app.use(cookieParser(config.cookieSecret));
-app.use(express.urlencoded({extended: false}));
+/* authentication */
+app.use(cors(corsOptions));
+app.use(session({
+    ...sessionConfig,
+    store: sessionStore
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+/* applications */
 app.use('/', authRouter);
+app.use('/users', userRouter)
 
 // catch 404 and forward to error handler
 app.use(<RequestHandler>function (req, res, next) {

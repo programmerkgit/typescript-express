@@ -1,4 +1,5 @@
 const path = require('path');
+process.env.NODE_ENV = process.env.NODE_ENV || 'dev'
 module.exports = {
     'config': path.resolve('sequelize.json'),
     'models-path': path.resolve('dist/db', 'models'),
