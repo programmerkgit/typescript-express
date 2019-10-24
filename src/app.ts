@@ -2,6 +2,7 @@ import { authRouter } from './app/routes/auth';
 import { ErrorRequestHandler, RequestHandler } from 'express';
 import { corsOptions, mysqlStoreOptions, sessionConfig } from './config';
 import { passport } from './passport';
+import {userRouter} from "./app/routes/user";
 
 const session = require('express-session');
 const MysqlStore = require('express-mysql-session')(session);
@@ -46,6 +47,7 @@ app.use(passport.session());
 
 /* applications */
 app.use('/', authRouter);
+app.use('/users', userRouter)
 
 // catch 404 and forward to error handler
 app.use(<RequestHandler>function (req, res, next) {
