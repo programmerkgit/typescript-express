@@ -32,6 +32,7 @@ userRouter.put(':/id', <RequestHandler>((req, res, next) => {
     modelApi.update(req, res, next)
 }));
 
+
 userRouter.post('', <RequestHandler>((req, res, next) => {
     modelApi.create(req, res, next)
 }));
