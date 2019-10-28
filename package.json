@@ -3,12 +3,17 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "build": "tsc -p tsconfig.app.json",
     "watch": "tsc --watch -p tsconfig.app.json",
     "watch:test": "tsc --watch -p tsconfig.spec.json",
     "test": "NODE_ENV=test jasmine",
     "start": "node ./dist/bin/www.js",
     "nodemon": "nodemon ./dist/bin/www.js",
-    "dev:sequelize:db:migrate": "NODE_ENV=dev sequelize db:migrate"
+    "dev:sequelize:db:migrate": "NODE_ENV=dev sequelize db:migrate",
+    "docker:build": "docker build -t dockeridkubo/sequelize-typescript-express:latest .",
+    "docker:run": "docker run --rm -p 3000:3000 -it --name ste dockeridkubo/sequelize-typescript-express:latest",
+    "docker:exec": "docker exec -it ste",
+    "docker:tag": "docker tag SOCURCE_IMAGE[:tag] TARGET_IMAGE:tag"
   },
   "dependencies": {
     "@types/bluebird": "^3.5.27",
@@ -29,16 +34,17 @@
     "express-mysql-session": "^2.1.0",
     "express-session": "^1.17.0",
     "http-errors": "~1.6.3",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "morgan": "~1.9.1",
     "mysql2": "^1.7.0",
-    "node-sass-middleware": "0.11.0",
+    "node-sass-middleware": "^0.11.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "pug": "2.0.0-beta11",
+    "pug": "^2.0.4",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^5.19.5",
-    "sequelize-typescript": "^1.0.0"
+    "sequelize-typescript": "^1.0.0",
+    "typescript": "^3.6.4"
   },
   "devDependencies": {
     "@types/jasmine": "^3.4.4",

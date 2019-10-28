@@ -1,6 +1,6 @@
-import {checkLogin, login, loginGuard, logout, signUp} from '../controller/auth';
-import {RequestHandler} from 'express';
-import {Session} from '../../db/models';
+import { checkLogin, login, logout, signUp } from '../controller/auth';
+import { RequestHandler } from 'express';
+import { Session } from '../../db/models';
 
 const express = require('express');
 const authRouter = express.Router();
