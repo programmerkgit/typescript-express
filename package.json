@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "watch": "tsc --watch",
+    "watch": "tsc --watch -p tsconfig.app.json",
+    "watch:test": "tsc --watch -p tsconfig.spec.json",
+    "test": "NODE_ENV=test jasmine",
     "start": "node ./dist/bin/www.js",
     "nodemon": "nodemon ./dist/bin/www.js",
     "dev:sequelize:db:migrate": "NODE_ENV=dev sequelize db:migrate"
@@ -39,6 +41,8 @@
     "sequelize-typescript": "^1.0.0"
   },
   "devDependencies": {
+    "@types/jasmine": "^3.4.4",
+    "jasmine": "^3.5.0",
     "nodemon": "^1.19.1"
   }
 }
