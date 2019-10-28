@@ -9,7 +9,7 @@ export const userRouter = express.Router();
 
 /* GET home page. */
 
-const modelApi = ModelApiFactory(User)
+const modelApi = new ModelApiFactory<User>(User)
 
 userRouter.use('*', <RequestHandler>((req, res, next) => {
     console.info('users router is called');
