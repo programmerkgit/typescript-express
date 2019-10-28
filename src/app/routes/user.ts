@@ -1,7 +1,7 @@
 import {signUp} from '../controller/auth';
 import {passport} from '../../passport';
 import {RequestHandler} from 'express';
-import {ModelApiFactory} from "../controller/model-controller-factory";
+import {ModelApiFactory} from "../controller/model-api-factory";
 import {User} from "../../db/models";
 
 const express = require('express');
