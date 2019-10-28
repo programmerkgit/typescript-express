@@ -12,8 +12,10 @@
     "dev:sequelize:db:migrate": "NODE_ENV=dev sequelize db:migrate",
     "docker:build": "docker build -t dockeridkubo/sequelize-typescript-express:latest .",
     "docker:run": "docker run --rm -p 3000:3000 -it --name ste dockeridkubo/sequelize-typescript-express:latest",
+    "docker-compose up": "docker-compose up",
     "docker:exec": "docker exec -it ste",
-    "docker:tag": "docker tag SOCURCE_IMAGE[:tag] TARGET_IMAGE:tag"
+    "docker:tag": "docker tag SOCURCE_IMAGE[:tag] TARGET_IMAGE:tag",
+    "compose": "docker-compose -f docker-compose.yml -f docker-compose.admin.yml run backup_db\n"
   },
   "dependencies": {
     "@types/bluebird": "^3.5.27",

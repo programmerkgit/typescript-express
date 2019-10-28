@@ -1,0 +1,44 @@
+version: '3'
+services:
+  api:
+    build:
+      context: .
+      args:
+        abd: "world"
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    network_mode: 'host'
+    depends_on:
+      - mysql
+    container_name: mock
+    environment:
+      - NODE_ENV=dev
+      - VAL=abd
+      - VAL2=$abd
+      - VAL3=${abd}
+      - WU=a
+    expose:
+      - "3000"
+    command: npm run start
+  api2:
+    build:
+      context: .
+      dockerfile: Dockerfile2
+    network_mode: 'host'
+    ports:
+      - "4000:3000"
+    links:
+      - mysql:api3
+    depends_on:
+      - mysql
+    container_name: mock2
+    environment:
+      - NODE_ENV=dev
+      - WU=a
+      - PORT=3000
+    expose:
+      - "4000"
+    command: npm run start
+  mysql:
+    image: mysql
