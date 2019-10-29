@@ -1,7 +1,9 @@
 FROM node:latest
 WORKDIR /usr/src/app
-COPY . .
-RUN npm install
+COPY package*.json ./
 ENV NODE_ENV=dev
+RUN npm install
+COPY . ./
+RUN npm run build
 EXPOSE 3000
-CMD [ "npm", "run", "nodemon" ]
+CMD [ "npm", "run", "start" ]

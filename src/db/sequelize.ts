@@ -6,7 +6,7 @@ const config = <any>{
         'username': 'root',
         'password': '',
         'database': database + '_dev',
-        'host': '127.0.0.1',
+        'host': 'localhost',
         port: 3306,
         'dialect': 'mysql'
     },
@@ -16,7 +16,7 @@ const config = <any>{
         'database': database + '_test',
         'host': '127.0.0.1',
         port: 3306,
-        'dialect': 'mysql'
+        'dialect': 'localhost'
     },
     'prod': {
         'username': 'root',
@@ -24,7 +24,7 @@ const config = <any>{
         'database': database + '_prod',
         port: 3306,
         'host': '127.0.0.1',
-        'dialect': 'mysql'
+        'dialect': 'localhost'
     }
 };
 export = config[ NODE_ENV ];
