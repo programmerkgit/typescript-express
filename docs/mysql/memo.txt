@@ -1,0 +1,9 @@
+docker run --rm --name enter-chain-test -d --publish=3300:3000 $npm_package_config_test_image
+
+
+docker run --rm --name enter-chain-test -d --publish=3300:3000 $npm_package_config_test_image
+
+docker run --rm --name=msql --env MYSQL_ROOT_PASSWORD='a'
+ --detach --publish 3308:3306 mysql:latest --default-authentication-plugin=mysql_native_password
+
+docker-compose up --abort-on-container-exit

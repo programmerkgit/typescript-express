@@ -25,4 +25,4 @@ authRouter.get('/logout', logout);
 /* create user and session */
 authRouter.post('/sign-up', signUp);
 
-export {authRouter};
+export { authRouter };

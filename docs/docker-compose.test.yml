@@ -2,7 +2,7 @@ version: '3'
 services:
   api:
     build:
-      context: .
+      context: ..
       args:
         abd: "world"
       dockerfile: Dockerfile
@@ -23,7 +23,7 @@ services:
     command: npm run start
   api2:
     build:
-      context: .
+      context: ..
       dockerfile: Dockerfile2
     network_mode: 'host'
     ports:

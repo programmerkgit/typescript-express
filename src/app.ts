@@ -2,7 +2,7 @@ import { authRouter } from './app/routes/auth';
 import { ErrorRequestHandler, RequestHandler } from 'express';
 import { corsOptions, mysqlStoreOptions, sessionConfig } from './config';
 import { passport } from './passport';
-import {userRouter} from "./app/routes/user";
+import { userRouter } from './app/routes/user';
 
 const session = require('express-session');
 const MysqlStore = require('express-mysql-session')(session);
@@ -16,6 +16,7 @@ const sassMiddleware = require('node-sass-middleware');
 // @ts-ignore
 export const app = express();
 const cors = require('cors');
+
 
 /*  logger */
 app.use(logger('dev'));
@@ -47,7 +48,10 @@ app.use(passport.session());
 
 /* applications */
 app.use('/', authRouter);
-app.use('/users', userRouter)
+app.use('/users', userRouter);
+app.use('/test', <RequestHandler>((req, res, next) => {
+    console.log('test');
+}));
 
 // catch 404 and forward to error handler
 app.use(<RequestHandler>function (req, res, next) {

@@ -1,0 +1,35 @@
+version: '3'
+services:
+  api:
+    build:
+      context: ..
+      args:
+        accessible_only_build_process: 1
+        mysql_host: mysql
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=dev
+      - mysql_host=mysql_host
+    image: api:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/code
+      - logvolume01:/var/log
+    links:
+      - mysql
+      - elasticsearch
+    depends_on:
+      - mysql
+      - elasticsearch
+    container_name: ste
+
+    expose:
+      - "3000"
+    command: npm run start
+  mysql:
+    image: mysql
+  elasticsearch:
+    image: elasticsearch
+  volumes:
+    logvolume01: {}

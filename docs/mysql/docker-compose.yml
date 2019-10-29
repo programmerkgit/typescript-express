@@ -1,0 +1,17 @@
+version: '3'
+services:
+  api:
+    build:
+      context: ""
+      dockerfile: Dockerfile
+    volumes:
+      - "./src:/usr/src/app/src"
+    environment:
+      - NODE_ENV=dev
+    image: api:latest
+    ports:
+      - "3000:3000"
+    container_name: ste
+    expose:
+      - "3000"
+    command: npm run nodemon

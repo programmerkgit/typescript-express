@@ -2,34 +2,28 @@ version: '3'
 services:
   api:
     build:
-      context: .
-      args:
-        accessible_only_build_process: 1
-        mysql_host: mysql
+      context: ""
       dockerfile: Dockerfile
+    working_dir: /usr/src/app
+    volumes:
+      - ./:/usr/src/app
     environment:
       - NODE_ENV=dev
-      - mysql_host=mysql_host
     image: api:latest
     ports:
       - "3000:3000"
-    volumes:
-      - .:/code
-      - logvolume01:/var/log
     links:
       - mysql
-      - elasticsearch
     depends_on:
       - mysql
-      - elasticsearch
     container_name: ste
-
     expose:
       - "3000"
-    command: npm run start
+    command: npm run nodemon
   mysql:
     image: mysql
-  elasticsearch:
-    image: elasticsearch
-  volumes:
-    logvolume01: {}
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1

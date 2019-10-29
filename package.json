@@ -10,12 +10,12 @@
     "start": "node ./dist/bin/www.js",
     "nodemon": "nodemon ./dist/bin/www.js",
     "dev:sequelize:db:migrate": "NODE_ENV=dev sequelize db:migrate",
-    "docker:build": "docker build -t dockeridkubo/sequelize-typescript-express:latest .",
-    "docker:run": "docker run --rm -p 3000:3000 -it --name ste dockeridkubo/sequelize-typescript-express:latest",
+    "docker:build": "docker build -t api:latest .",
+    "docker:run": "docker run --rm -p 3000:3000 -it --name ste api:latest",
     "docker-compose up": "docker-compose up",
     "docker:exec": "docker exec -it ste",
     "docker:tag": "docker tag SOCURCE_IMAGE[:tag] TARGET_IMAGE:tag",
-    "compose": "docker-compose -f docker-compose.yml -f docker-compose.admin.yml run backup_db\n"
+    "compose": "docker-compose -f docs/docker-compose.yml -f docker-compose.admin.yml run backup_db\\n"
   },
   "dependencies": {
     "@types/bluebird": "^3.5.27",
@@ -45,6 +45,7 @@
     "pug": "^2.0.4",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^5.19.5",
+    "sequelize-cli": "^5.5.1",
     "sequelize-typescript": "^1.0.0",
     "typescript": "^3.6.4"
   },
