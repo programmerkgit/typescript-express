@@ -50,7 +50,8 @@ app.use(passport.session());
 app.use('/', authRouter);
 app.use('/users', userRouter);
 app.use('/test', <RequestHandler>((req, res, next) => {
-    console.log('test');
+    console.log('test', 'reloaded');
+    res.json({test: true})
 }));
 
 // catch 404 and forward to error handler

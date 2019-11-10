@@ -9,7 +9,13 @@ services:
       - ./dist:/usr/src/app/dist
     environment:
       - NODE_ENV=dev
+      - MYSQL_USER=root
+      - MYSQL_PASS=
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=demo
     image: api:latest
+    restart: always
     ports:
       - "3000:3000"
     links:
@@ -23,7 +29,6 @@ services:
   mysql:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
-    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ""
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
