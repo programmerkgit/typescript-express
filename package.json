@@ -9,7 +9,10 @@
     "test": "NODE_ENV=test jasmine",
     "start": "node ./dist/bin/www.js",
     "nodemon": "nodemon ./dist/bin/www.js",
-    "debug": "nodemon --inspect dist/bin/www.js"
+    "debug": "nodemon --inspect dist/bin/www.js",
+    "docker:run": "docker run -v $(pwd)/dist/:/usr/src/app/dist --restart always -it --name tmp --publish=3000:3000 api:latest",
+    "docker:rm": "docker rm tmp",
+    "docker:build": "docker build -t api:latest -f Dockerfile ."
   },
   "dependencies": {
     "@types/bluebird": "^3.5.27",
