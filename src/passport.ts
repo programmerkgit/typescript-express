@@ -18,7 +18,7 @@ passport.use(new Strategy({
         } else {
             return done(null, false, {message: 'Incorrect username.'});
         }
-    }).catch(err => {
+    }).catch((err: any) => {
         return done(err);
     });
 }));
