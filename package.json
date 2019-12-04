@@ -2,23 +2,20 @@
   "name": "sequelize-typescript-express",
   "version": "0.0.0",
   "private": true,
+  "config": {
+    "app_name": "demo"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.app.json",
     "watch": "tsc --watch -p tsconfig.app.json",
     "watch:test": "tsc --watch -p tsconfig.spec.json",
-    "test": "NODE_ENV=test jasmine",
+    "test": "NODE_ENV=test MYSQL_DATABASE=$npm_package_config_app_name jasmine",
     "start": "node ./dist/bin/www.js",
-    "nodemon": "nodemon ./dist/bin/www.js",
-    "dev:sequelize:db:migrate": "NODE_ENV=dev sequelize db:migrate",
-    "docker:build": "docker build -t api:latest .",
-    "docker:run": "docker run --rm -p 3000:3000 -it --name ste api:latest",
-    "docker-compose up": "docker-compose up",
-    "docker:exec": "docker exec -it ste",
-    "docker:tag": "docker tag SOCURCE_IMAGE[:tag] TARGET_IMAGE:tag",
-    "docker:run:mysql": "docker run --rm --name=mysql --env MYSQL_ROOT_PASSWORD='' MYSQL_ALLOW_EMPTY_PASSWORD='' --detach --publish 3306:3306 mysql:latest --default-authentication-plugin=mysql_native_password",
-    "compose": "docker-compose -f docs/docker-compose.yml -f docker-compose.admin.yml run backup_db\\n",
-    "mysql:down": "brew services stop mysql",
-    "mysql:up": "brew services start mysql"
+    "nodemon": "NODE_ENV=dev MYSQL_DATABASE=$npm_package_config_app_name nodemon ./dist/bin/www.js",
+    "debug": "NODE_ENV=dev MYSQL_DATABASE=$npm_package_config_app_name nodemon --inspect dist/bin/www.js",
+    "docker:run": "docker run -v $(pwd)/dist/:/usr/src/app/dist --restart always -it --name tmp --publish=3000:3000 api:latest",
+    "docker:rm": "docker rm tmp",
+    "docker:build": "docker build -t api:latest -f Dockerfile ."
   },
   "dependencies": {
     "bcrypt": "^3.0.6",

@@ -1,8 +1,8 @@
-import {authRouter} from './app/routes/auth';
-import {ErrorRequestHandler, RequestHandler} from 'express';
-import {corsOptions, mysqlStoreOptions, sessionConfig} from './config';
-import {passport} from './passport';
-import {userRouter} from './app/routes/user';
+import { authRouter } from './app/routes/auth';
+import { ErrorRequestHandler, RequestHandler } from 'express';
+import { corsOptions, mysqlStoreOptions, sessionConfig } from './config';
+import { passport } from './passport';
+import { userRouter } from './app/routes/user';
 
 const session = require('express-session');
 const MysqlStore = require('express-mysql-session')(session);
@@ -49,13 +49,10 @@ app.use(passport.session());
 /* applications */
 app.use('/', authRouter);
 app.use('/users', userRouter);
-if (process.env.NODE_ENV === 'dev') {
-    app.use('/test', <RequestHandler>((req, res, next) => {
-        console.log('test');
-        res.json({a: "1135"})
-    }));
-}
-
+app.use('/test', <RequestHandler>((req, res, next) => {
+    console.log('test', 'reloaded');
+    res.json({test: true})
+}));
 
 // catch 404 and forward to error handler
 app.use(<RequestHandler>function (req, res, next) {
