@@ -7,7 +7,7 @@ passport.use(new Strategy({
     usernameField: 'email',
     passwordField: 'password'
 }, (email, password, done) => {
-    User.findOne({where: {email}}).then(user => {
+    User.findOne({where: {email: email}}).then(user => {
         if (user) {
             if (user.comparePassword(password)) {
                 console.log('Login success');

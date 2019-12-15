@@ -9,7 +9,7 @@
     "build": "tsc -p tsconfig.app.json",
     "watch": "tsc --watch -p tsconfig.app.json",
     "watch:test": "tsc --watch -p tsconfig.spec.json",
-    "test": "NODE_ENV=test MYSQL_DATABASE=$npm_package_config_app_name jasmine",
+    "test": "./env.test.sh jasmine",
     "start": "node ./dist/bin/www.js",
     "nodemon": "NODE_ENV=dev MYSQL_DATABASE=$npm_package_config_app_name nodemon ./dist/bin/www.js",
     "debug": "NODE_ENV=dev MYSQL_DATABASE=$npm_package_config_app_name nodemon --inspect dist/bin/www.js",

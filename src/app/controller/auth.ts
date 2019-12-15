@@ -3,6 +3,7 @@ import { User } from '../../db/models';
 import { passport } from '../../passport';
 
 
+//
 export const login: RequestHandler = passport.authenticate('local');
 
 export const logout: RequestHandler = <RequestHandler>((req, res, next) => {

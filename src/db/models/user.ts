@@ -24,6 +24,7 @@ export default class User extends Model<User> {
     @Column({
         type: DataType.STRING,
     })
+
     get password(): string {
         return this.getDataValue('password');
     }

@@ -1,9 +1,3 @@
-#spec
-node node_modules/jasmine/bin/jasmine init
+# session db の設定
 
-
-# start
-npm run serve
-
-# prod 
-npm run build --prod
+# ENVの設定

@@ -12,11 +12,3 @@ export = {
     port: port,
     dialect: 'mysql'
 };
-
-
-// dev
-// mysql => docker + volume
-// container => not use.
-// test
-// mysql => container. same as dev mysql container
-// production => single container

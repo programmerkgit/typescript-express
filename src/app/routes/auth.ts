@@ -1,6 +1,6 @@
-import { checkLogin, login, logout, signUp } from '../controller/auth';
-import { RequestHandler } from 'express';
-import { Session } from '../../db/models';
+import {checkLogin, login, logout, signUp} from '../controller/auth';
+import {RequestHandler} from 'express';
+
 
 const express = require('express');
 const authRouter = express.Router();
@@ -10,19 +10,17 @@ const authRouter = express.Router();
 /* Session */
 /* create */
 authRouter.post('/login', login, <RequestHandler>((req, res, next) => {
-    Session.findOne().then(sessio => {
-        res.json({user: req.user});
-    }).catch(error => {
-        console.log(error);
-    });
+    /* TODO: determine auth api */
+    res.end();
 }));
-/* get */
+
+/* check if session is alive */
 authRouter.get('/check-login', checkLogin);
 
-/* destroy */
+/* destroy session */
 authRouter.get('/logout', logout);
 
-/* create user and session */
+/* create user */
 authRouter.post('/sign-up', signUp);
 
-export { authRouter };
+export {authRouter};
