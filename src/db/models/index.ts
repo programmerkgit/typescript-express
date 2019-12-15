@@ -1,9 +1,9 @@
-import { Sequelize } from 'sequelize-typescript';
+import {Sequelize} from "sequelize-typescript";
 
-import User from './user';
+import User from "./user";
 
-const config = require('../sequelize');
+const config = require("../sequelize");
 export const sequelize = new Sequelize(config);
-sequelize.addModels([ User ]);
+sequelize.addModels([User]);
 
-export { User };
+export {User};

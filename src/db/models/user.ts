@@ -1,7 +1,7 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {Column, DataType, Model, Table} from "sequelize-typescript";
 
 
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 
 // DB定義とモデル定義を正確にする。
@@ -10,7 +10,7 @@ const bcrypt = require('bcrypt');
 
 @Table({
     timestamps: true,
-    tableName: 'Users'
+    tableName: "Users"
 })
 export default class User extends Model<User> {
     /* Should use UUIDV4 for default value. Default value UUID is just a string.  */
@@ -34,13 +34,13 @@ export default class User extends Model<User> {
     })
 
     get password(): string {
-        return this.getDataValue('password');
+        return this.getDataValue("password");
     }
 
     set password(value: string) {
         const salt = bcrypt.genSaltSync(10);
         const encryptedPass = bcrypt.hashSync(value, salt);
-        this.setDataValue('password', encryptedPass);
+        this.setDataValue("password", encryptedPass);
     }
 
     comparePassword(password: string): boolean {

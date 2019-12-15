@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
-import { QueryInterface } from 'sequelize';
-import { User } from '../models/index';
+import {QueryInterface} from "sequelize";
+import {User} from "../models/index";
 
-const email = 'admin@example.com';
-const password = 'Admin1234';
+const email = "admin@example.com";
+const password = "Admin1234";
 
 export const up = (queryInterface: QueryInterface, Sequelize: any) => {
     return User.create({email, password});
