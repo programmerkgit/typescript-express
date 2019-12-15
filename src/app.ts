@@ -16,8 +16,6 @@ const sassMiddleware = require('node-sass-middleware');
 // @ts-ignore
 export const app = express();
 const cors = require('cors');
-
-
 /*  logger */
 app.use(logger('dev'));
 /* parser */
