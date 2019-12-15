@@ -13,6 +13,7 @@
     "start": "node ./dist/bin/www.js",
     "nodemon": "NODE_ENV=dev MYSQL_DATABASE=$npm_package_config_app_name nodemon ./dist/bin/www.js",
     "debug": "NODE_ENV=dev MYSQL_DATABASE=$npm_package_config_app_name nodemon --inspect dist/bin/www.js",
+    "debug_console": "NODE_ENV=dev MYSQL_DATABASE=$npm_package_config_app_name nodemon --inspect dist/dev_script.js",
     "docker:run": "docker run -v $(pwd)/dist/:/usr/src/app/dist --restart always -it --name tmp --publish=3000:3000 api:latest",
     "docker:rm": "docker rm tmp",
     "docker:build": "docker build -t api:latest -f Dockerfile ."
