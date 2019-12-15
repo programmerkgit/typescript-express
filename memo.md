@@ -34,3 +34,6 @@ https://dev.to/getd/how-to-manage-secrets-and-configs-using-dotenv-in-node-js-an
 dev
 test
 production docker
+
+# FIX sequelize env
+# fix session store env
