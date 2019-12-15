@@ -1,12 +1,13 @@
 import { authRouter } from './app/routes/auth';
 import { ErrorRequestHandler, RequestHandler } from 'express';
-import { corsOptions, mysqlStoreOptions, sessionConfig } from './config';
+import { sessionStoreOption, sessionConfig } from './session_store/config';
 import { passport } from './passport';
 import { userRouter } from './app/routes/user';
+import {corsOptions} from "./config";
 
 const session = require('express-session');
 const MysqlStore = require('express-mysql-session')(session);
-const sessionStore = new MysqlStore(mysqlStoreOptions);
+const sessionStore = new MysqlStore(sessionStoreOption);
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -34,12 +35,16 @@ app.use(sassMiddleware({
     sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, '../public')));
+
 /* authentication */
 app.use(cors(corsOptions));
+/* session */
 app.use(session({
     ...sessionConfig,
     store: sessionStore
 }));
+
+/* setting of passport */
 app.use(passport.initialize());
 app.use(passport.session());
 
