@@ -1,4 +1,3 @@
-const NODE_ENV = process.env.NODE_ENV || 'dev';
 const host = process.env.MYSQL_HOST || '127.0.0.1';
 const password = process.env.MYSQL_PASS || '';
 const username = process.env.MYSQL_USER || 'root';
@@ -7,7 +6,7 @@ const database = process.env.MYSQL_DATABASE || 'demo';
 export = {
     username: username,
     password: password,
-    database: database + '_' + NODE_ENV,
+    database: database,
     host: host,
     port: port,
     dialect: 'mysql'

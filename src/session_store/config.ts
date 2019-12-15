@@ -1,5 +1,11 @@
 import {SessionOptions} from 'express-session';
 
+const host = process.env.SESSION_DB_HOST || '127.0.0.1';
+const password = process.env.SESSION_DB_PASS || '';
+const username = process.env.SESSION_DB_USER || 'root';
+const port = process.env.SESSION_DB_PORT || '3306';
+const database = process.env.SESSION_DB_DATABASE || 'demo';
+
 export const sessionConfig: SessionOptions = {
     secret: 'secret',
     resave: true,
@@ -12,19 +18,13 @@ export const sessionConfig: SessionOptions = {
     },
 };
 
-const NODE_ENV = process.env.NODE_ENV || 'dev';
-const host = process.env.MYSQL_HOST || '127.0.0.1';
-const password = process.env.MYSQL_PASS || '';
-const username = process.env.MYSQL_USER || 'root';
-const port = process.env.MYSQL_PORT || '3306';
-const database = process.env.MYSQL_DATABASE || 'demo';
 
 export const sessionStoreOption = {
     host: host,
     port: port,
     user: username,
     password: password,
-    database: database + '_' + NODE_ENV,
+    database: database,
     schema: {
         tableName: 'Sessions'
     }
