@@ -3,6 +3,12 @@ import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
 const bcrypt = require('bcrypt');
 
+
+// DB定義とモデル定義を正確にする。
+// DBのNullを避ける。
+//
+
+
 @Table({
     timestamps: true,
     tableName: 'Users'
