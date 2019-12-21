@@ -1,7 +1,8 @@
 import { QueryInterface } from 'sequelize';
+import { DataType } from 'sequelize-typescript';
 
 const tableName = 'Users';
-export const up = (queryInterface: QueryInterface, Sequelize: any) => {
+export const up = (queryInterface: QueryInterface, Sequelize: typeof DataType) => {
     return queryInterface.createTable(tableName, {
         id: {
             allowNull: false,
