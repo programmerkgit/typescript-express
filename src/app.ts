@@ -13,7 +13,8 @@ const express = require("express");
 const path = require("path");
 const logger = require("morgan");
 const sassMiddleware = require("node-sass-middleware");
-
+const n = 10;
+console.dir(n)
 // @ts-ignore
 export const app = express();
 const cors = require("cors");
