@@ -2,6 +2,8 @@
   "extends": "./tsconfig",
   "compilerOptions": {
     "outDir": "dist-spec",
+    "sourceRoot": "src",
+    "mapRoot": "dist-spec",
     "noImplicitAny": false
   },
   "include": [
